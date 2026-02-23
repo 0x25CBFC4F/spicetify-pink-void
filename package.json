@@ -1,0 +1,11 @@
+{
+  "name": "p1nk-v01d-spicetify-theme",
+  "version": "1.0.0",
+  "description": "A warm dark Spicetify theme with pink-purple soul",
+  "scripts": {
+    "deploy": "node scripts/deploy.js",
+    "apply": "spicetify config current_theme \"p1nk v01d\" color_scheme \"p1nk v01d\" && spicetify apply",
+    "install-theme": "npm run deploy && npm run apply",
+    "uninstall": "spicetify restore"
+  }
+}

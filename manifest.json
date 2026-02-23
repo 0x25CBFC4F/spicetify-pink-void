@@ -1,0 +1,12 @@
+{
+  "name": "p1nk v01d",
+  "description": "A warm dark theme with pink-purple soul. Gradient progress bar, frosted glass menus, and subtle glow effects.",
+  "preview": "preview.png",
+  "readme": "README.md",
+  "usercss": "user.css",
+  "schemes": "color.ini",
+  "authors": [
+    { "name": "nullie", "url": "https://github.com/YOUR_USERNAME" }
+  ],
+  "tags": ["dark", "pink", "purple", "warm"]
+}

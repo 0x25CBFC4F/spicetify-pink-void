@@ -1,0 +1,1263 @@
+/* ================================================================
+   p 1 n k   v 0 1 d
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ================================================================
+   I.  DESIGN TOKENS
+   ================================================================ */
+
+:root {
+  /* -- Accent palette -- */
+  --void-pink: 217, 79, 158;
+  --void-purple: 180, 77, 224;
+  --void-rose: 238, 111, 186;
+  --void-violet: 142, 68, 196;
+  --void-blush: 255, 160, 210;
+
+  /* -- Surface tints -- */
+  --void-surface-1: rgba(255, 255, 255, 0.03);
+  --void-surface-2: rgba(255, 255, 255, 0.05);
+  --void-surface-3: rgba(255, 255, 255, 0.08);
+  --void-surface-hover: rgba(var(--void-pink), 0.07);
+  --void-surface-active: rgba(var(--void-pink), 0.12);
+
+  /* -- Borders -- */
+  --void-border-faint: rgba(255, 255, 255, 0.04);
+  --void-border-subtle: rgba(255, 255, 255, 0.07);
+  --void-border-accent: rgba(var(--void-pink), 0.2);
+  --void-border-glow: rgba(var(--void-pink), 0.35);
+
+  /* -- Glow & shadows -- */
+  --void-glow-sm: 0 0 8px rgba(var(--void-pink), 0.2);
+  --void-glow-md: 0 0 16px rgba(var(--void-pink), 0.2);
+  --void-glow-lg: 0 4px 30px rgba(var(--void-pink), 0.15);
+  --void-shadow-sm: 0 2px 8px rgba(8, 6, 14, 0.4);
+  --void-shadow-md: 0 4px 16px rgba(8, 6, 14, 0.5);
+  --void-shadow-lg: 0 8px 40px rgba(8, 6, 14, 0.6);
+  --void-shadow-xl: 0 16px 64px rgba(8, 6, 14, 0.7);
+
+  /* -- Gradients -- */
+  --void-grad-accent: linear-gradient(135deg, rgb(var(--void-pink)), rgb(var(--void-purple)));
+  --void-grad-accent-h: linear-gradient(90deg, rgb(var(--void-pink)), rgb(var(--void-purple)));
+  --void-grad-surface: linear-gradient(180deg, rgba(var(--void-pink), 0.06), transparent);
+  --void-grad-radial: radial-gradient(ellipse at 30% 0%, rgba(var(--void-purple), 0.08), transparent 60%);
+  --void-grad-warm: linear-gradient(180deg, rgba(var(--void-pink), 0.04) 0%, transparent 40%);
+
+  /* -- Motion -- */
+  --void-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --void-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --void-speed-fast: 0.15s;
+  --void-speed: 0.25s;
+  --void-speed-slow: 0.4s;
+
+  /* -- Radius -- */
+  --void-radius-sm: 6px;
+  --void-radius-md: 10px;
+  --void-radius-lg: 14px;
+  --void-radius-xl: 20px;
+  --void-radius-pill: 100px;
+}
+
+
+/* ================================================================
+   II. TYPOGRAPHY
+   ================================================================ */
+
+* {
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* Tighten up heading letter-spacing */
+h1, h2, h3,
+[class*="Type__TypeElement"] {
+  letter-spacing: -0.01em !important;
+}
+
+/* Large display headings */
+.main-entityHeader-title h1,
+.main-shelf-title {
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+}
+
+/* Body text refinement */
+span, p, a, div {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+
+/* ================================================================
+   III. GLOBAL BACKGROUND & NOISE TEXTURE
+   ================================================================ */
+
+body {
+  background-color: var(--spice-main) !important;
+}
+
+
+/* Noise texture overlay for depth */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+
+/* ================================================================
+   IV. SIDEBAR (Left Panel)
+   ================================================================ */
+
+/* Container */
+.Root__nav-bar,
+.LayoutResizer__resize-bar {
+  background: var(--spice-sidebar) !important;
+}
+
+.Root__nav-bar {
+  border-right: 1px solid var(--void-border-faint) !important;
+}
+
+/* Sidebar top section (Home / Search) */
+.main-navBar-navBar {
+  background: transparent !important;
+  padding: 8px !important;
+  gap: 2px !important;
+}
+
+/* Nav links */
+.main-navBar-navBarLink {
+  border-radius: var(--void-radius-md) !important;
+  padding: 10px 16px !important;
+  transition: background var(--void-speed) var(--void-ease),
+              color var(--void-speed) var(--void-ease) !important;
+}
+
+.main-navBar-navBarLink:hover {
+  background: var(--void-surface-hover) !important;
+}
+
+.main-navBar-navBarLink.active {
+  background: var(--void-surface-active) !important;
+  color: var(--spice-text) !important;
+}
+
+/* Your Library section */
+.main-yourLibraryX-libraryContainer {
+  background: transparent !important;
+}
+
+.main-yourLibraryX-libraryRootlist {
+  background: transparent !important;
+}
+
+/* Library items */
+.main-yourLibraryX-listItem {
+  border-radius: var(--void-radius-sm) !important;
+  transition: background var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-yourLibraryX-listItem:hover {
+  background: var(--void-surface-hover) !important;
+}
+
+/* Library filter chips */
+.main-yourLibraryX-filterArea button {
+  background: var(--void-surface-2) !important;
+  border: 1px solid var(--void-border-faint) !important;
+  border-radius: var(--void-radius-pill) !important;
+  color: var(--spice-subtext) !important;
+  transition: all var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-yourLibraryX-filterArea button:hover {
+  background: var(--void-surface-3) !important;
+  color: var(--spice-text) !important;
+}
+
+.main-yourLibraryX-filterArea button[aria-checked="true"],
+.main-yourLibraryX-filterArea button.active {
+  background: rgba(var(--void-pink), 0.15) !important;
+  border-color: var(--void-border-accent) !important;
+  color: rgb(var(--void-rose)) !important;
+}
+
+/* Sidebar resize handle */
+.LayoutResizer__input {
+  background: transparent !important;
+}
+
+.LayoutResizer__input:hover {
+  background: rgba(var(--void-pink), 0.3) !important;
+}
+
+/* Sidebar footer (Install app, etc) */
+.main-navBar-navBarFooter {
+  border-top: 1px solid var(--void-border-faint) !important;
+}
+
+
+/* ================================================================
+   V.  TOP BAR / NAVIGATION
+   ================================================================ */
+
+.main-topBar-container {
+  background: transparent !important;
+  padding: 12px 16px !important;
+}
+
+/* Scrolled state — frosted glass */
+.main-topBar-container[style*="background-color"],
+.main-topBar-background {
+  background: rgba(17, 14, 24, 0.8) !important;
+  backdrop-filter: blur(20px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+  border-bottom: 1px solid var(--void-border-faint) !important;
+}
+
+/* Back / Forward buttons */
+.main-topBar-historyButtons button {
+  background: var(--void-surface-2) !important;
+  border: 1px solid var(--void-border-faint) !important;
+  color: var(--spice-subtext) !important;
+  border-radius: 50% !important;
+  transition: all var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-topBar-historyButtons button:hover {
+  background: var(--void-surface-3) !important;
+  color: var(--spice-text) !important;
+  border-color: var(--void-border-subtle) !important;
+}
+
+/* User avatar button */
+.main-topBar-container button[data-testid="user-widget-link"] {
+  background: var(--void-surface-2) !important;
+  border: 1px solid var(--void-border-faint) !important;
+  transition: all var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-topBar-container button[data-testid="user-widget-link"]:hover {
+  border-color: var(--void-border-accent) !important;
+  box-shadow: var(--void-glow-sm) !important;
+}
+
+/* Top bar action buttons (upgrade, install, etc) */
+.main-topBar-container .encore-over-media-set button {
+  border-radius: var(--void-radius-pill) !important;
+}
+
+
+/* ================================================================
+   VI. MAIN CONTENT AREA
+   ================================================================ */
+
+.Root__main-view {
+  background: var(--spice-main) !important;
+}
+
+/* Section titles (e.g. "Made For You", "Recently Played") */
+.main-shelf-title {
+  color: var(--spice-text) !important;
+}
+
+.main-shelf-title a:hover {
+  color: rgb(var(--void-rose)) !important;
+}
+
+/* "Show all" links */
+.main-shelf-seeAll {
+  color: var(--spice-subtext) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  transition: color var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-shelf-seeAll:hover {
+  color: rgb(var(--void-rose)) !important;
+}
+
+/* Horizontal scroll sections */
+.main-shelf-shelf {
+  padding-bottom: 4px !important;
+}
+
+
+/* ================================================================
+   VII. CARDS
+   ================================================================ */
+
+/* Base card */
+.main-card-card {
+  background: var(--spice-card) !important;
+  border: 1px solid var(--void-border-faint) !important;
+  border-radius: var(--void-radius-md) !important;
+  box-shadow: var(--void-shadow-sm) !important;
+  transition: all var(--void-speed) var(--void-ease) !important;
+  overflow: hidden !important;
+}
+
+.main-card-card:hover {
+  background: rgba(28, 22, 40, 0.95) !important;
+  border-color: var(--void-border-accent) !important;
+  box-shadow: var(--void-glow-lg) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* Card image */
+.main-card-card .main-cardImage-imageWrapper {
+  border-radius: var(--void-radius-sm) !important;
+  overflow: hidden !important;
+}
+
+.main-card-card:hover .main-cardImage-imageWrapper {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Card image slight zoom on hover */
+.main-card-card .main-image-image {
+  transition: transform var(--void-speed-slow) var(--void-ease) !important;
+}
+
+.main-card-card:hover .main-image-image {
+  transform: scale(1.03) !important;
+}
+
+/* Card play button (green circle → pink) */
+.main-card-PlayButtonContainer button,
+.main-card-card button[data-testid="play-button"] {
+  background-color: rgb(var(--void-pink)) !important;
+  color: #fff !important;
+  box-shadow: var(--void-shadow-md) !important;
+  transition: all var(--void-speed-fast) var(--void-ease-bounce) !important;
+}
+
+.main-card-PlayButtonContainer button:hover,
+.main-card-card button[data-testid="play-button"]:hover {
+  transform: scale(1.08) !important;
+  background-color: rgb(var(--void-rose)) !important;
+  box-shadow: var(--void-glow-md) !important;
+}
+
+/* Card text */
+.main-card-card .main-cardHeader-text {
+  color: var(--spice-text) !important;
+}
+
+.main-card-card .main-cardSubHeader-root {
+  color: var(--spice-subtext) !important;
+}
+
+/* Card hover text color */
+.main-card-card:hover .main-cardHeader-link {
+  color: rgb(var(--void-blush)) !important;
+}
+
+
+/* ================================================================
+   VIII. GENRE / BROWSE CATEGORY CARDS
+   ================================================================ */
+
+.main-cardImage-imagePlaceholder,
+[data-testid="genre-card"] {
+  border-radius: var(--void-radius-md) !important;
+  overflow: hidden !important;
+}
+
+
+/* ================================================================
+   IX. TRACK LIST / TABLE
+   ================================================================ */
+
+/* Table header */
+.main-trackList-trackListHeaderRow {
+  border-bottom: 1px solid var(--void-border-faint) !important;
+  color: var(--spice-subtext) !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* Column resize handles → thin separator lines */
+[aria-label="Resize columns"] {
+  background: transparent !important;
+  border: none !important;
+  width: 1px !important;
+  min-width: 1px !important;
+  max-width: 1px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+[aria-label="Resize columns"]::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 20% !important;
+  bottom: 20% !important;
+  left: 0 !important;
+  width: 1px !important;
+  background: var(--void-border-subtle) !important;
+  transition: background var(--void-speed-fast) var(--void-ease) !important;
+}
+
+[aria-label="Resize columns"]:hover::after {
+  background: rgba(var(--void-pink), 0.4) !important;
+}
+
+/* Track rows */
+.main-trackList-trackListRow {
+  border-radius: var(--void-radius-sm) !important;
+  transition: background var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-trackList-trackListRow:hover {
+  background: var(--void-surface-hover) !important;
+}
+
+/* Currently playing row */
+.main-trackList-trackListRow.main-trackList-active,
+.main-trackList-trackListRow[aria-selected="true"] {
+  background: var(--void-surface-active) !important;
+}
+
+/* Playing indicator (animated bars icon) */
+.main-trackList-playingIcon {
+  color: rgb(var(--void-pink)) !important;
+}
+
+/* Track name when playing */
+.main-trackList-active .main-trackList-trackListRowName,
+[class*="trackListRow"] [data-encore-id="text"][style*="color"] {
+  color: rgb(var(--void-rose)) !important;
+}
+
+/* Track number / index */
+.main-trackList-rowSectionIndex {
+  color: var(--spice-subtext) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* Track duration */
+.main-trackList-rowSectionEnd {
+  color: var(--spice-subtext) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* Track drag handle on hover */
+.main-trackList-trackListRow:hover .main-trackList-rowSectionIndex {
+  color: var(--spice-text) !important;
+}
+
+
+/* ================================================================
+   X.  ALBUM / PLAYLIST PAGE HEADERS
+   ================================================================ */
+
+/* Hero gradient overlay */
+.main-entityHeader-backgroundColor,
+.main-entityHeader-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--void-purple), 0.15) 0%,
+    var(--spice-main) 100%
+  ) !important;
+}
+
+/* Entity title */
+.main-entityHeader-title h1 {
+  font-weight: 700 !important;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Entity owner / metadata */
+.main-entityHeader-metaData,
+.main-entityHeader-metaData span,
+.main-entityHeader-metaData a {
+  color: var(--spice-subtext) !important;
+}
+
+.main-entityHeader-metaData a:hover {
+  color: var(--spice-text) !important;
+}
+
+/* Entity cover art */
+.main-entityHeader-image img {
+  border-radius: var(--void-radius-md) !important;
+  box-shadow: var(--void-shadow-lg) !important;
+}
+
+/* Action bar (play, heart, more) */
+.main-actionBar-ActionBar {
+  padding: 16px 0 16px 16px !important;
+}
+
+/* Big play button on entity pages */
+.main-actionBar-ActionBar button[data-testid="play-button"],
+.main-actionBar-ActionBar button[data-testid="pause-button"] {
+  background: rgb(var(--void-pink)) !important;
+  transition: all var(--void-speed-fast) var(--void-ease-bounce) !important;
+}
+
+.main-actionBar-ActionBar button[data-testid="play-button"]:hover,
+.main-actionBar-ActionBar button[data-testid="pause-button"]:hover {
+  background: rgb(var(--void-rose)) !important;
+  transform: scale(1.05) !important;
+  box-shadow: var(--void-glow-md) !important;
+}
+
+
+/* ================================================================
+   XI. ARTIST PAGES
+   ================================================================ */
+
+/* Artist header gradient */
+.main-entityHeader-background {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--void-purple), 0.2) 0%,
+    var(--spice-main) 90%
+  ) !important;
+}
+
+/* Monthly listeners text */
+.main-entityHeader-headerText span[data-testid="monthly-listeners-label"] {
+  color: var(--spice-subtext) !important;
+}
+
+/* Discography section headers */
+.main-shelf-title[as="h2"] {
+  border-bottom: none !important;
+}
+
+
+/* ================================================================
+   XII. NOW PLAYING BAR (Bottom Player)
+   ================================================================ */
+
+.Root__now-playing-bar {
+  background: var(--spice-player) !important;
+  border-top: 1px solid var(--void-border-accent) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Warm glow strip along the top edge */
+.Root__now-playing-bar::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--void-grad-accent-h);
+  opacity: 0.6;
+}
+
+/* Album art in player */
+.Root__now-playing-bar .main-image-image {
+  border-radius: var(--void-radius-sm) !important;
+  box-shadow: var(--void-shadow-sm) !important;
+  transition: border-radius var(--void-speed) var(--void-ease) !important;
+}
+
+.Root__now-playing-bar .main-image-image:hover {
+  border-radius: var(--void-radius-md) !important;
+}
+
+/* Now playing track name */
+.Root__now-playing-bar a[data-testid="context-item-link"] {
+  color: var(--spice-text) !important;
+  font-weight: 500 !important;
+  transition: color var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.Root__now-playing-bar a[data-testid="context-item-link"]:hover {
+  color: rgb(var(--void-rose)) !important;
+}
+
+/* Now playing artist name */
+.Root__now-playing-bar a[data-testid="context-item-info-artist"] {
+  color: var(--spice-subtext) !important;
+}
+
+.Root__now-playing-bar a[data-testid="context-item-info-artist"]:hover {
+  color: rgb(var(--void-blush)) !important;
+}
+
+/* -- Progress bar track — cyan to purple gradient -- */
+.x-progressBar-sliderArea {
+  background: linear-gradient(90deg, #5ef5ff, #d946ef) !important;
+  border-radius: 3px !important;
+}
+
+/* Current progress fill — translucent white, always visible */
+.x-progressBar-fillColor {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-radius: 3px !important;
+  opacity: 1 !important;
+}
+
+/* Progress bar knob */
+.x-progressBar-sliderArea [role="slider"] div,
+.playback-bar [role="slider"] div {
+  background: #fff !important;
+  border: 2px solid rgb(var(--void-pink)) !important;
+  box-shadow: var(--void-glow-sm) !important;
+}
+
+/* -- Volume bar -- */
+.volume-bar [data-testid="progress-bar"] > div:first-child > div {
+  background: var(--void-grad-accent-h) !important;
+}
+
+.volume-bar [data-testid="progress-bar"] > div:first-child {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Playback control buttons */
+.player-controls__buttons button {
+  color: var(--spice-subtext) !important;
+  transition: all var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.player-controls__buttons button:hover {
+  color: var(--spice-text) !important;
+}
+
+/* Active shuffle / repeat */
+.player-controls__buttons button[aria-checked="true"],
+.player-controls__buttons button.control-button--active {
+  color: rgb(var(--void-pink)) !important;
+}
+
+/* Main play/pause in player */
+.player-controls__buttons button[data-testid="control-button-playpause"],
+.player-controls button[data-testid="control-button-playpause"] {
+  background: rgb(var(--void-pink)) !important;
+  color: #fff !important;
+  border-radius: 50% !important;
+  transition: all var(--void-speed-fast) var(--void-ease-bounce) !important;
+}
+
+.player-controls__buttons button[data-testid="control-button-playpause"]:hover,
+.player-controls button[data-testid="control-button-playpause"]:hover {
+  background: rgb(var(--void-rose)) !important;
+  transform: scale(1.06) !important;
+  box-shadow: var(--void-glow-md) !important;
+}
+
+/* Extra player buttons (queue, devices, lyrics, etc.) */
+.main-nowPlayingBar-extraControls button,
+.player-controls__right button {
+  color: var(--spice-subtext) !important;
+  transition: color var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-nowPlayingBar-extraControls button:hover,
+.player-controls__right button:hover {
+  color: var(--spice-text) !important;
+}
+
+.main-nowPlayingBar-extraControls button[aria-checked="true"],
+.player-controls__right button[aria-checked="true"] {
+  color: rgb(var(--void-pink)) !important;
+}
+
+/* Time stamps */
+.playback-bar__progress-time-elapsed,
+.playback-bar__progress-time,
+.playback-bar [class*="progress-bar"] + div {
+  color: var(--spice-subtext) !important;
+  font-size: 11px !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+
+/* ================================================================
+   XIII. NOW PLAYING VIEW (Right Panel)
+   ================================================================ */
+
+.Root__right-sidebar {
+  background: var(--spice-sidebar) !important;
+  border-left: 1px solid var(--void-border-faint) !important;
+}
+
+/* Now playing view cover art */
+.main-nowPlayingView-coverArt img {
+  border-radius: var(--void-radius-lg) !important;
+  box-shadow: var(--void-shadow-lg) !important;
+}
+
+/* Queue in now playing view */
+.main-nowPlayingView-sectionHeaderText {
+  color: var(--spice-text) !important;
+  font-weight: 600 !important;
+}
+
+
+/* ================================================================
+   XIV. SEARCH
+   ================================================================ */
+
+/* Search input */
+.x-searchInput-searchInputInput,
+input[data-testid="search-input"],
+[role="search"] input {
+  background: var(--void-surface-2) !important;
+  border: 1px solid var(--void-border-subtle) !important;
+  border-radius: var(--void-radius-pill) !important;
+  color: var(--spice-text) !important;
+  padding: 10px 16px 10px 40px !important;
+  transition: all var(--void-speed) var(--void-ease) !important;
+}
+
+.x-searchInput-searchInputInput:focus,
+input[data-testid="search-input"]:focus,
+[role="search"] input:focus {
+  background: var(--void-surface-3) !important;
+  border-color: rgb(var(--void-pink)) !important;
+  box-shadow: 0 0 0 3px rgba(var(--void-pink), 0.12) !important;
+  outline: none !important;
+}
+
+/* Search input placeholder */
+.x-searchInput-searchInputInput::placeholder,
+input[data-testid="search-input"]::placeholder {
+  color: var(--spice-subtext) !important;
+  opacity: 0.6 !important;
+}
+
+/* Search results chips / filters */
+[role="search"] ~ div button,
+.search-searchCategory-catergoryButton {
+  border-radius: var(--void-radius-pill) !important;
+}
+
+
+/* ================================================================
+   XV. QUEUE PANEL
+   ================================================================ */
+
+.main-queue-queue {
+  background: transparent !important;
+}
+
+.main-queue-queueItem {
+  border-radius: var(--void-radius-sm) !important;
+  transition: background var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-queue-queueItem:hover {
+  background: var(--void-surface-hover) !important;
+}
+
+/* Queue section titles */
+.main-queue-header {
+  color: var(--spice-text) !important;
+  font-weight: 600 !important;
+}
+
+
+/* ================================================================
+   XVI. LYRICS
+   ================================================================ */
+
+.lyrics-lyrics-contentContainer {
+  background: transparent !important;
+}
+
+/* Inactive lyrics */
+.lyrics-lyricsContent-lyric {
+  color: rgba(var(--void-blush), 0.35) !important;
+  font-weight: 400 !important;
+  transition: color var(--void-speed-slow) var(--void-ease),
+              font-weight var(--void-speed-slow) var(--void-ease),
+              opacity var(--void-speed-slow) var(--void-ease) !important;
+}
+
+/* Active lyric */
+.lyrics-lyricsContent-lyric.lyrics-lyricsContent-active {
+  color: rgb(var(--void-blush)) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 24px rgba(var(--void-pink), 0.3) !important;
+}
+
+/* Lyric hover */
+.lyrics-lyricsContent-lyric:hover {
+  color: rgba(var(--void-blush), 0.6) !important;
+}
+
+/* Lyrics background gradient */
+.lyrics-lyrics-background {
+  opacity: 0.15 !important;
+}
+
+
+/* ================================================================
+   XVII. CONTEXT MENUS / DROPDOWNS
+   ================================================================ */
+
+.main-contextMenu-menu,
+[data-depth] > ul,
+[role="menu"] {
+  background: rgba(22, 18, 34, 0.92) !important;
+  backdrop-filter: blur(24px) saturate(1.3) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.3) !important;
+  border: 1px solid var(--void-border-subtle) !important;
+  border-radius: var(--void-radius-md) !important;
+  box-shadow: var(--void-shadow-xl) !important;
+  padding: 4px !important;
+  overflow-y: visible !important;
+}
+
+/* Menu items */
+.main-contextMenu-menuItemButton,
+[role="menuitem"] {
+  border-radius: var(--void-radius-sm) !important;
+  padding: 8px 12px !important;
+  transition: background var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-contextMenu-menuItemButton:hover,
+[role="menuitem"]:hover,
+[role="menuitem"]:focus {
+  background: var(--void-surface-hover) !important;
+}
+
+/* Menu dividers */
+.main-contextMenu-divider,
+[role="separator"] {
+  background: var(--void-border-faint) !important;
+  margin: 4px 8px !important;
+}
+
+
+/* ================================================================
+   XVIII. MODALS & DIALOGS
+   ================================================================ */
+
+[role="dialog"],
+.GenericModal,
+.main-trackCreditsModal-container {
+  background: rgba(22, 18, 34, 0.95) !important;
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border: 1px solid var(--void-border-subtle) !important;
+  border-radius: var(--void-radius-lg) !important;
+  box-shadow: var(--void-shadow-xl) !important;
+}
+
+/* Modal backdrop */
+[data-overlayscrollbars-viewport] ~ div[style*="opacity"],
+.GenericModal__overlay {
+  background: rgba(8, 6, 14, 0.7) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+/* Create playlist modal */
+.main-editPlaylistModal-content {
+  background: rgba(22, 18, 34, 0.98) !important;
+  border-radius: var(--void-radius-lg) !important;
+}
+
+
+/* ================================================================
+   XIX. SCROLLBARS
+   ================================================================ */
+
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--void-pink), 0.15) !important;
+  border-radius: 3px !important;
+  transition: background 0.2s !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--void-pink), 0.3) !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+
+/* ================================================================
+   XX. BUTTONS
+   ================================================================ */
+
+/* Primary buttons */
+button[data-encore-id="buttonPrimary"],
+button.main-buttons-button.main-button-primary {
+  background: rgb(var(--void-pink)) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--void-radius-pill) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: var(--void-shadow-sm) !important;
+  transition: all var(--void-speed-fast) var(--void-ease) !important;
+}
+
+button[data-encore-id="buttonPrimary"]:hover,
+button.main-buttons-button.main-button-primary:hover {
+  background: rgb(var(--void-rose)) !important;
+  box-shadow: var(--void-glow-md) !important;
+  transform: translateY(-1px) !important;
+}
+
+button[data-encore-id="buttonPrimary"]:active,
+button.main-buttons-button.main-button-primary:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* Secondary / outline buttons */
+button[data-encore-id="buttonSecondary"],
+button.main-buttons-button.main-button-secondary {
+  background: transparent !important;
+  border: 1px solid var(--void-border-subtle) !important;
+  border-radius: var(--void-radius-pill) !important;
+  color: var(--spice-text) !important;
+  font-weight: 500 !important;
+  transition: all var(--void-speed-fast) var(--void-ease) !important;
+}
+
+button[data-encore-id="buttonSecondary"]:hover,
+button.main-buttons-button.main-button-secondary:hover {
+  border-color: rgb(var(--void-pink)) !important;
+  color: rgb(var(--void-rose)) !important;
+  background: rgba(var(--void-pink), 0.06) !important;
+}
+
+/* Tertiary / text buttons */
+button[data-encore-id="buttonTertiary"] {
+  color: var(--spice-subtext) !important;
+  transition: color var(--void-speed-fast) var(--void-ease) !important;
+}
+
+button[data-encore-id="buttonTertiary"]:hover {
+  color: var(--spice-text) !important;
+}
+
+/* Icon buttons (small circular) */
+button[data-encore-id="buttonIcon"] {
+  color: var(--spice-subtext) !important;
+  transition: all var(--void-speed-fast) var(--void-ease) !important;
+}
+
+button[data-encore-id="buttonIcon"]:hover {
+  color: var(--spice-text) !important;
+  background: var(--void-surface-hover) !important;
+}
+
+
+/* ================================================================
+   XXI. HEART / SAVE BUTTON
+   ================================================================ */
+
+button[data-testid="add-button"] svg,
+button[aria-label*="Save"] svg,
+button[aria-label*="save"] svg {
+  transition: all var(--void-speed-fast) var(--void-ease-bounce) !important;
+}
+
+button[data-testid="add-button"][aria-checked="true"] svg,
+button[aria-label*="Remove from Your Library"] svg {
+  color: rgb(var(--void-pink)) !important;
+}
+
+button[data-testid="add-button"]:hover svg,
+button[aria-label*="Save"]:hover svg,
+button[aria-label*="save"]:hover svg {
+  transform: scale(1.15) !important;
+}
+
+
+/* ================================================================
+   XXII. TOOLTIPS
+   ================================================================ */
+
+[data-tippy-root] .tippy-content,
+[role="tooltip"] {
+  background: rgba(22, 18, 34, 0.95) !important;
+  border: 1px solid var(--void-border-subtle) !important;
+  border-radius: var(--void-radius-sm) !important;
+  box-shadow: var(--void-shadow-md) !important;
+  color: var(--spice-text) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+[data-tippy-root] .tippy-arrow::before {
+  color: rgba(22, 18, 34, 0.95) !important;
+}
+
+
+/* ================================================================
+   XXIII. NOTIFICATIONS / TOASTS
+   ================================================================ */
+
+.main-notification-notification {
+  background: rgba(22, 18, 34, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--void-border-accent) !important;
+  border-radius: var(--void-radius-md) !important;
+  box-shadow: var(--void-glow-lg) !important;
+  color: var(--spice-text) !important;
+}
+
+
+/* ================================================================
+   XXIV. FRIEND ACTIVITY (Right Sidebar)
+   ================================================================ */
+
+.main-buddyFeed-activityFeedContainer {
+  background: var(--spice-sidebar) !important;
+  border-left: 1px solid var(--void-border-faint) !important;
+}
+
+.main-buddyFeed-buddyFeedItem:hover {
+  background: var(--void-surface-hover) !important;
+}
+
+
+/* ================================================================
+   XXV. ALBUM ART
+   ================================================================ */
+
+/* Global rounded corners on all images */
+.main-image-image {
+  border-radius: var(--void-radius-sm) !important;
+}
+
+/* Artist circular images stay circular */
+[data-testid="cardImage"] .main-image-image[style*="border-radius: 50%"] {
+  border-radius: 50% !important;
+}
+
+/* Full-screen now playing art */
+.main-nowPlayingView-coverArt .main-image-image {
+  border-radius: var(--void-radius-lg) !important;
+}
+
+
+/* ================================================================
+   XXVI. CHIPS, BADGES, TAGS
+   ================================================================ */
+
+/* Filter chips (Home page: All, Music, Podcasts) */
+.main-chip-chip,
+[class*="chipInner"] {
+  background: var(--void-surface-2) !important;
+  border: 1px solid var(--void-border-faint) !important;
+  border-radius: var(--void-radius-pill) !important;
+  color: var(--spice-subtext) !important;
+  font-weight: 500 !important;
+  transition: all var(--void-speed-fast) var(--void-ease) !important;
+}
+
+.main-chip-chip:hover,
+[class*="chipInner"]:hover {
+  background: var(--void-surface-3) !important;
+  border-color: var(--void-border-subtle) !important;
+  color: var(--spice-text) !important;
+}
+
+.main-chip-chip.main-chip-selected,
+.main-chip-chip[aria-checked="true"] {
+  background: rgba(var(--void-pink), 0.18) !important;
+  border-color: var(--void-border-accent) !important;
+  color: rgb(var(--void-rose)) !important;
+}
+
+
+/* ================================================================
+   XXVII. INPUT FIELDS & FORMS
+   ================================================================ */
+
+input[type="text"],
+input[type="search"],
+textarea {
+  background: var(--void-surface-2) !important;
+  border: 1px solid var(--void-border-subtle) !important;
+  border-radius: var(--void-radius-sm) !important;
+  color: var(--spice-text) !important;
+  transition: all var(--void-speed) var(--void-ease) !important;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+  border-color: rgb(var(--void-pink)) !important;
+  box-shadow: 0 0 0 3px rgba(var(--void-pink), 0.1) !important;
+  outline: none !important;
+}
+
+
+/* ================================================================
+   XXVIII. CONNECT BAR (Device picker)
+   ================================================================ */
+
+.main-connectBar-connectBar {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--void-pink)),
+    rgb(var(--void-purple))
+  ) !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+}
+
+
+/* ================================================================
+   XXIX. PODCAST / EPISODE SPECIFICS
+   ================================================================ */
+
+/* Episode progress bar */
+.main-episodeProgress-progressBarContainer .progress-bar__fg {
+  background: var(--void-grad-accent-h) !important;
+}
+
+/* Episode description links */
+.main-episodeCard-episodeDescription a {
+  color: rgb(var(--void-rose)) !important;
+}
+
+.main-episodeCard-episodeDescription a:hover {
+  text-decoration: underline !important;
+}
+
+
+/* ================================================================
+   XXX. ENCORE DESIGN SYSTEM OVERRIDES
+   ================================================================
+   Spotify uses "Encore" internally — override its palette tokens
+   to prevent any default green from leaking through.
+   ================================================================ */
+
+.encore-bright-accent-set,
+.encore-dark-theme,
+.encore-base-set,
+[data-encore-theme] {
+  --background-base: var(--spice-main) !important;
+  --background-highlight: var(--spice-card) !important;
+  --background-press: var(--spice-selected-row) !important;
+  --background-elevated-base: var(--spice-card) !important;
+  --background-elevated-highlight: var(--spice-selected-row) !important;
+  --background-tinted-base: var(--void-surface-2) !important;
+  --background-tinted-highlight: var(--void-surface-3) !important;
+  --text-base: var(--spice-text) !important;
+  --text-subdued: var(--spice-subtext) !important;
+  --text-bright-accent: rgb(var(--void-rose)) !important;
+  --essential-base: var(--spice-text) !important;
+  --essential-subdued: var(--spice-subtext) !important;
+  --essential-bright-accent: rgb(var(--void-pink)) !important;
+  --essential-positive: rgb(var(--void-pink)) !important;
+  --essential-negative: var(--spice-notification-error) !important;
+  --decorative-base: var(--spice-text) !important;
+  --decorative-subdued: var(--spice-subtext) !important;
+}
+
+/* Override the green accent specifically */
+.encore-bright-accent-set {
+  --background-base: rgb(var(--void-pink)) !important;
+  --background-highlight: rgb(var(--void-rose)) !important;
+  --text-base: #fff !important;
+  --essential-base: #fff !important;
+  color: #fff !important;
+}
+
+/* Home shortcuts grid — play button icon always visible */
+.view-homeShortcutsGrid-PlayButtonContainer,
+.view-homeShortcutsGrid-PlayButtonContainer *,
+.view-homeShortcutsGrid-playButton,
+.view-homeShortcutsGrid-playButton * {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+
+/* ================================================================
+   XXXI. SMOOTH GLOBAL TRANSITIONS
+   ================================================================ */
+
+a, button, input, textarea,
+[role="button"],
+[role="link"],
+[role="tab"],
+[role="menuitem"] {
+  transition: color var(--void-speed-fast) var(--void-ease),
+              background-color var(--void-speed-fast) var(--void-ease),
+              border-color var(--void-speed-fast) var(--void-ease),
+              box-shadow var(--void-speed-fast) var(--void-ease),
+              transform var(--void-speed-fast) var(--void-ease),
+              opacity var(--void-speed-fast) var(--void-ease) !important;
+}
+
+/* Disable transitions on page load to prevent flash */
+body.loading * {
+  transition: none !important;
+}
+
+
+/* ================================================================
+   XXXII. FOCUS STATES (Accessibility)
+   ================================================================ */
+
+*:focus-visible {
+  outline: 2px solid rgba(var(--void-pink), 0.5) !important;
+  outline-offset: 2px !important;
+  border-radius: var(--void-radius-sm) !important;
+}
+
+
+/* ================================================================
+   XXXIII. SELECTION COLOR
+   ================================================================ */
+
+::selection {
+  background: rgba(var(--void-pink), 0.3) !important;
+  color: #fff !important;
+}
+
+
+/* ================================================================
+   XXXIV. SETTINGS CREDIT
+   ================================================================ */
+
+.x-settings-header::after {
+  content: 'theme made with love by nullie & claude \1F49C  #transrights' !important;
+  display: block !important;
+  margin-top: 6px !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  color: var(--spice-subtext) !important;
+  opacity: 0.5 !important;
+  letter-spacing: 0.02em !important;
+}
+
+
+/* ================================================================
+   FIN.
+   ================================================================ */
