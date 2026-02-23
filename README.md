@@ -1,5 +1,7 @@
 # p1nk v01d
 
+![Theme screenshot](preview.png)
+
 A warm dark Spicetify theme with pink-purple soul.
 
 ![Spotify themed with p1nk v01d](https://img.shields.io/badge/spicetify-v2.42%2B-d94f9e)
